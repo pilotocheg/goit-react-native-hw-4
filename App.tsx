@@ -1,11 +1,17 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import HomePage from './src/pages/home';
+import { Routing } from './src/routing';
+import { StatusBar } from 'react-native';
 
 function App() {
   return (
     <SafeAreaProvider>
-      <HomePage />
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
+      <Routing />
     </SafeAreaProvider>
   );
 }

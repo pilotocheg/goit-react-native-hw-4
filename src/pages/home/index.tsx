@@ -1,13 +1,14 @@
 import { View } from 'react-native';
 import { useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { TodoList } from '../../components/todo-list';
 import { TodoItemProps } from '../../components/todo-item';
 import { AddTodoInput } from '../../components/add-todo-input';
 import { TabBar } from '../../components/tab-bar';
+import { Header } from '../../components/header';
 
 import { styles } from './styles';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const tabs = [
   { title: 'All', id: 'all' },
@@ -49,6 +50,7 @@ function HomePage() {
         { paddingTop: insets.top, paddingBottom: Math.max(insets.bottom, 16) },
       ]}
     >
+      <Header />
       <TabBar onPress={setActiveTab} activeTab={activeTab} tabs={tabs} />
       <TodoList
         todos={todos}
