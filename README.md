@@ -1,6 +1,18 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Todos App
 
-# Getting Started
+## Home work 4 - Navigation
+
+Screenshots:
+<img width="1522" height="2048" alt="navigation" src="https://github.com/user-attachments/assets/10fbe64c-0bf0-4fe6-9ec4-2e9d51997603" />
+
+
+Videos:
+https://github.com/user-attachments/assets/a7aa6054-3683-46f4-b124-1e2198139f59
+
+
+
+
+## Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
