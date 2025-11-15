@@ -7,13 +7,14 @@ import { styles } from './styles';
 export type Props = {
   checked: boolean;
   onPress?: () => void;
+  hitSlop?: number;
 };
 
 export function Checkbox(props: Props) {
-  const { checked, onPress } = props;
+  const { checked, onPress, hitSlop } = props;
 
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+    <TouchableOpacity onPress={onPress} hitSlop={hitSlop} activeOpacity={0.8}>
       <View style={[styles.container, checked && styles.checked]}>
         {checked && <Image source={checkIcon} style={styles.checkedIcon} />}
       </View>

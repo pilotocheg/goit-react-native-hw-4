@@ -1,25 +1,23 @@
 import { View, Text } from 'react-native';
 
+import { TodoItem as TodoItemType } from '../../api/todos/dto';
 import { Checkbox } from '../checkbox';
 
 import { styles } from './styles';
 
-export type TodoItemProps = {
-  id: string;
-  text: string;
-  isCompleted: boolean;
+export type TodoItemProps = TodoItemType & {
   onCheckboxPress?: () => void;
 };
 
 export function TodoItem(props: TodoItemProps) {
-  const { text, isCompleted, onCheckboxPress } = props;
+  const { text, completed, onCheckboxPress } = props;
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, isCompleted && styles.completedText]}>
+      <Text style={[styles.text, completed && styles.completedText]}>
         {text}
       </Text>
-      <Checkbox checked={isCompleted} onPress={onCheckboxPress} />
+      <Checkbox checked={completed} onPress={onCheckboxPress} hitSlop={10} />
     </View>
   );
 }
