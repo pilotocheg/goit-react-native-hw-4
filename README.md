@@ -1,13 +1,8 @@
 # Todos App
 
-## Home work 4 - Navigation
+## Home work 5 - Api integration
 
-Screenshots:
-<img width="1522" height="2048" alt="navigation" src="https://github.com/user-attachments/assets/10fbe64c-0bf0-4fe6-9ec4-2e9d51997603" />
-
-
-Videos:
-https://github.com/user-attachments/assets/a7aa6054-3683-46f4-b124-1e2198139f59
+https://github.com/user-attachments/assets/588eaa10-f9bc-41fa-9822-81d6ef92956c
 
 
 
