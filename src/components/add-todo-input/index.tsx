@@ -7,16 +7,13 @@ import {
 } from 'react-native';
 
 import addIcon from '../../assets/icons/add-icon.png';
+import { createTodoThunk } from '../../redux/todos/thunks';
+import { useAppDispatch } from '../../utils/redux/dispatch';
 
 import { styles } from './styles';
 
-type Props = {
-  onAddTodo: (text: string) => void;
-};
-
-export function AddTodoInput(props: Props) {
-  const { onAddTodo } = props;
-
+export function AddTodoInput() {
+  const dispatch = useAppDispatch();
   const [text, setText] = useState('');
 
   const inputRef = useRef<TextInput>(null);
@@ -26,7 +23,7 @@ export function AddTodoInput(props: Props) {
 
     if (!trimmedText) return;
 
-    onAddTodo(trimmedText);
+    dispatch(createTodoThunk(trimmedText));
     setText('');
   };
 

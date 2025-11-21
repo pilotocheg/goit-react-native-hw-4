@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import Toast from 'react-native-toast-message';
 
 import { TodoItem } from './dto';
+import { GetTodosParams } from './types';
 
 const api = axios.create({
   baseURL: 'https://69172ae0a7a34288a27fc725.mockapi.io/',
@@ -35,12 +36,6 @@ const makeRequest = async <T>(
   }
 };
 
-type GetTodosParams = {
-  page: number;
-  limit: number;
-  completed?: boolean;
-};
-
 export const getTodos = (params: GetTodosParams) => {
   const { page, limit, completed } = params;
 
@@ -68,8 +63,8 @@ export const createTodo = async (todo: Omit<TodoItem, 'id'>) => {
   });
 };
 
-export const updateTodo = async (todo: Partial<TodoItem>) => {
-  return makeRequest<TodoItem>(`/todos/${todo.id}`, {
+export const updateTodo = async (id: string, todo: Partial<TodoItem>) => {
+  return makeRequest<TodoItem>(`/todos/${id}`, {
     errorTitle: 'Failed to update todo',
     method: 'PUT',
     data: todo,

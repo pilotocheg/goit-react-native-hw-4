@@ -1,31 +1,37 @@
 import { View, TouchableOpacity, Text } from 'react-native';
+import { useSelector } from 'react-redux';
+
+import { selectFilter, setFilter } from '../../redux/todos';
+import { TodosFilter } from '../../redux/todos/types';
+import { useAppDispatch } from '../../utils/redux/dispatch';
 
 import { styles } from './styles';
 
 type Tab = {
   title: string;
-  id: string;
+  id: TodosFilter;
 };
 
-type Props = {
-  onPress: (tab: string) => void;
-  activeTab: string;
-  tabs: Tab[];
-};
+const tabs: Tab[] = [
+  { title: 'All', id: TodosFilter.ALL },
+  { title: 'Active', id: TodosFilter.ACTIVE },
+  { title: 'Completed', id: TodosFilter.COMPLETED },
+];
 
-export const TabBar = (props: Props) => {
-  const { onPress, activeTab, tabs } = props;
+export const TabBar = () => {
+  const dispatch = useAppDispatch();
+  const filter = useSelector(selectFilter);
 
   return (
     <View style={styles.container}>
       {tabs.map(tab => {
-        const isActive = activeTab === tab.id;
+        const isActive = filter === tab.id;
 
         return (
           <TouchableOpacity
             key={tab.id}
             style={styles.button}
-            onPress={() => onPress(tab.id)}
+            onPress={() => dispatch(setFilter(tab.id))}
             disabled={isActive}
           >
             <View>

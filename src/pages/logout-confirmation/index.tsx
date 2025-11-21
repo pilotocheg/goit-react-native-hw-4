@@ -1,19 +1,22 @@
 import { useNavigation } from '@react-navigation/native';
 
 import { ConfirmationModal } from '../../components/confirmation-modal';
+import { useAuthContext } from '../../context/auth';
+import { resetState } from '../../redux/todos';
+import { useAppDispatch } from '../../utils/redux/dispatch';
 
 export function LogoutConfirmation() {
   const navigation = useNavigation();
+  const { setIsAuthenticated } = useAuthContext();
+  const dispatch = useAppDispatch();
 
   const handleCancel = () => {
     navigation.goBack();
   };
 
   const handleConfirm = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }],
-    });
+    setIsAuthenticated(false);
+    dispatch(resetState());
   };
 
   return (

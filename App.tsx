@@ -1,7 +1,10 @@
+import { StatusBar } from 'react-native';
+import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Routing } from './src/routing';
-import { StatusBar } from 'react-native';
+import { AuthProvider } from './src/context/auth';
+import { store } from './src/redux/store';
 
 function App() {
   return (
@@ -11,7 +14,11 @@ function App() {
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      <Routing />
+      <AuthProvider>
+        <Provider store={store}>
+          <Routing />
+        </Provider>
+      </AuthProvider>
     </SafeAreaProvider>
   );
 }

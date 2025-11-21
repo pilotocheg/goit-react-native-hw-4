@@ -1,57 +1,52 @@
 import { ActivityIndicator, FlatList, View } from 'react-native';
-import { RefObject, useImperativeHandle, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 import { TodoItem as TodoItemType } from '../../api/todos/dto';
 import { theme } from '../../styles/theme';
+import {
+  resetTodos,
+  selectAllLoaded,
+  selectFilter,
+  selectLoading,
+  selectTodos,
+} from '../../redux/todos';
+import {
+  fetchTodosThunk,
+  toggleCompletedThunk,
+} from '../../redux/todos/thunks';
+import { useAppDispatch } from '../../utils/redux/dispatch';
+
 import { TodoItem } from '../todo-item';
 
+import { useResetScrollPosition } from './use-reset-scroll-position';
 import { styles } from './styles';
-
-export type ListRef = {
-  scrollToStart: () => void;
-};
-
-type Props = {
-  loading: boolean;
-  todos: TodoItemType[];
-  activeTab: string;
-  onToggleComplete: (id: string) => void;
-  onLoadMore: () => void;
-  listRef?: RefObject<ListRef | null>;
-};
 
 const keyExtractor = (item: TodoItemType) => item.id;
 
-export function TodoList(props: Props) {
-  const {
-    loading,
-    todos,
-    activeTab,
-    onToggleComplete,
-    onLoadMore,
-    listRef: externalListRef,
-  } = props;
+export function TodoList() {
+  const dispatch = useAppDispatch();
+  const todos = useSelector(selectTodos);
+  const filter = useSelector(selectFilter);
+  const loading = useSelector(selectLoading);
+  const allLoaded = useSelector(selectAllLoaded);
 
   const listRef = useRef<FlatList<TodoItemType>>(null);
 
-  useImperativeHandle(externalListRef, () => ({
-    scrollToStart: () => {
-      listRef.current?.scrollToIndex({ index: 0, animated: true });
-    },
-  }));
+  useResetScrollPosition(todos, listRef);
 
-  const filteredTodos = useMemo(() => {
-    return todos.filter(todo => {
-      switch (activeTab) {
-        case 'active':
-          return !todo.completed;
-        case 'completed':
-          return todo.completed;
-        default:
-          return true;
-      }
-    });
-  }, [todos, activeTab]);
+  useEffect(() => {
+    dispatch(resetTodos());
+    dispatch(fetchTodosThunk());
+  }, [filter, dispatch]);
+
+  const loadMoreTodos = () => {
+    if (allLoaded || loading) {
+      return;
+    }
+
+    dispatch(fetchTodosThunk());
+  };
 
   if (loading && !todos.length) {
     return (
@@ -62,7 +57,10 @@ export function TodoList(props: Props) {
   }
 
   const renderItem = ({ item }: { item: TodoItemType }) => (
-    <TodoItem {...item} onCheckboxPress={() => onToggleComplete(item.id)} />
+    <TodoItem
+      {...item}
+      onCheckboxPress={() => dispatch(toggleCompletedThunk(item))}
+    />
   );
 
   const renderFooter = () => {
@@ -77,13 +75,13 @@ export function TodoList(props: Props) {
   return (
     <FlatList
       ref={listRef}
-      data={filteredTodos}
+      data={todos}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       style={styles.list}
-      onEndReached={onLoadMore}
-      onEndReachedThreshold={0.5}
       ListFooterComponent={renderFooter}
+      onEndReached={loadMoreTodos}
+      onEndReachedThreshold={0.5}
     />
   );
 }
