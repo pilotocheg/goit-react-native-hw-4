@@ -1,16 +1,17 @@
 # Todos App
 
-## Home work 6 - Redux and Context API
-### Context api for authentication data
-<img width="1348" height="808" alt="code-1" src="https://github.com/user-attachments/assets/7958fdd9-3e21-4e75-82bb-491c2288d063" />
-<img width="1348" height="888" alt="code-2" src="https://github.com/user-attachments/assets/a77f20c4-a536-47d0-9820-cd4a4481890b" />
-<img width="1348" height="2448" alt="code-3" src="https://github.com/user-attachments/assets/8951fbe5-f4e6-43fb-80ff-6f14729e5737" />
-
-### Redux for todos list and pagination
-<img width="1348" height="2288" alt="code-4" src="https://github.com/user-attachments/assets/83fe6fda-d9f3-423a-9281-8043ab56c33c" />
-<img width="1348" height="3368" alt="code-5" src="https://github.com/user-attachments/assets/e4fc48ba-1842-418a-ad77-6a12d3ba7fbc" />
+## Home work 7 - Optimizations
+### Add Todo Animation example
+https://github.com/user-attachments/assets/e8359452-0339-4912-9397-71a08ed25504
 
 
+### Memo optimization - before and after
+https://github.com/user-attachments/assets/91c36a37-9a9f-4db5-8f69-771bf8917394
+
+https://github.com/user-attachments/assets/5bdcf2cb-6e5e-491f-954e-ce07f17ba96b
+
+### Packages optimization
+No heavy packages to replace
 
 
 
