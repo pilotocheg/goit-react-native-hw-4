@@ -1,5 +1,10 @@
-import { ActivityIndicator, FlatList, View } from 'react-native';
-import { useEffect, useRef } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  LayoutAnimation,
+  View,
+} from 'react-native';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { TodoItem as TodoItemType } from '../../api/todos/dto';
@@ -11,10 +16,7 @@ import {
   selectLoading,
   selectTodos,
 } from '../../redux/todos';
-import {
-  fetchTodosThunk,
-  toggleCompletedThunk,
-} from '../../redux/todos/thunks';
+import { fetchTodosThunk } from '../../redux/todos/thunks';
 import { useAppDispatch } from '../../utils/redux/dispatch';
 
 import { TodoItem } from '../todo-item';
@@ -32,6 +34,12 @@ export function TodoList() {
   const allLoaded = useSelector(selectAllLoaded);
 
   const listRef = useRef<FlatList<TodoItemType>>(null);
+
+  useLayoutEffect(() => {
+    if (todos.length) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    }
+  }, [todos]);
 
   useResetScrollPosition(todos, listRef);
 
@@ -57,10 +65,7 @@ export function TodoList() {
   }
 
   const renderItem = ({ item }: { item: TodoItemType }) => (
-    <TodoItem
-      {...item}
-      onCheckboxPress={() => dispatch(toggleCompletedThunk(item))}
-    />
+    <TodoItem {...item} />
   );
 
   const renderFooter = () => {
