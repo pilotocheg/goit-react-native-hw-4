@@ -10,12 +10,12 @@ const api = axios.create({
 
 type RequestOptions = AxiosRequestConfig & {
   errorTitle: string;
-  shouldShowToast?: (error: AxiosError) => void;
+  shouldHandleError?: (error: AxiosError) => boolean;
 };
 
 const makeRequest = async <T>(
   url: string,
-  { errorTitle, shouldShowToast, ...options }: RequestOptions,
+  { errorTitle, shouldHandleError, ...options }: RequestOptions,
 ) => {
   try {
     const response = await api.request<T>({
@@ -24,26 +24,27 @@ const makeRequest = async <T>(
     });
     return response.data;
   } catch (error) {
-    if (shouldShowToast?.(error as AxiosError)) {
+    if (shouldHandleError?.(error as AxiosError)) {
       Toast.show({
         type: 'error',
         text1: errorTitle,
         text2: (error as AxiosError).message,
       });
+      console.error(`${errorTitle}:`, error);
     }
-    console.error(`${errorTitle}:`, error);
     throw error;
   }
 };
 
 export const getTodos = (params: GetTodosParams) => {
-  const { page, limit, completed } = params;
+  const { page, limit, completed, userId } = params;
 
   const queryParams: AxiosRequestConfig['params'] = {
     page,
     limit,
     sortBy: 'createdAt',
     order: 'desc',
+    userId,
   };
   if (completed !== undefined) {
     queryParams.completed = completed;
@@ -51,7 +52,7 @@ export const getTodos = (params: GetTodosParams) => {
   return makeRequest<TodoItem[]>('/todos', {
     errorTitle: 'Failed to load todos',
     params: queryParams,
-    shouldShowToast: error => error.response?.status !== 404,
+    shouldHandleError: error => error.response?.status !== 404,
   });
 };
 

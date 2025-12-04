@@ -2,24 +2,23 @@ import { View, Text } from 'react-native';
 import { memo } from 'react';
 
 import { TodoItem as TodoItemType } from '../../api/todos/dto';
+import { toggleCompletedThunk } from '../../redux/todos/thunks';
+import { useAppDispatch } from '../../utils/redux/dispatch';
+
 import { Checkbox } from '../checkbox';
 
 import { styles } from './styles';
-import { toggleCompletedThunk } from '../../redux/todos/thunks';
-import { useAppDispatch } from '../../utils/redux/dispatch';
 
 export type TodoItemProps = TodoItemType;
 
 export const TodoItem = memo((props: TodoItemProps) => {
-  const { text, completed, id } = props;
+  const { text, completed } = props;
 
   const dispatch = useAppDispatch();
 
   const handleCheckboxPress = () => {
     dispatch(toggleCompletedThunk(props));
   };
-
-  console.log('todo item render', id);
 
   return (
     <View style={styles.container}>

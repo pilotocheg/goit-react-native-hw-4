@@ -10,7 +10,7 @@ const PAGE_SIZE = 10;
 
 export const fetchTodosThunk = createAsyncThunk(
   'todos/fetchTodos',
-  async (_, { getState }) => {
+  async (userId: string, { getState }) => {
     const { page, filter } = (getState() as RootState).todos;
 
     const params: GetTodosParams = {
@@ -20,6 +20,7 @@ export const fetchTodosThunk = createAsyncThunk(
         filter === TodosFilter.ALL
           ? undefined
           : filter === TodosFilter.COMPLETED,
+      userId,
     };
     const todos = await getTodos(params);
 
@@ -33,11 +34,12 @@ export const fetchTodosThunk = createAsyncThunk(
 
 export const createTodoThunk = createAsyncThunk(
   'todos/createTodo',
-  (text: string) =>
+  ({ text, userId }: Pick<TodoItem, 'text' | 'userId'>) =>
     createTodo({
       text,
       completed: false,
       createdAt: Date.now(),
+      userId,
     }),
 );
 

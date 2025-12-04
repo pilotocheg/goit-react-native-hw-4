@@ -14,12 +14,17 @@
     "@react-navigation/native-stack": "^7.6.2",
     "@reduxjs/toolkit": "^2.10.1",
     "axios": "^1.13.2",
+    "formik": "^2.4.9",
     "react": "19.1.1",
     "react-native": "0.82.1",
+    "react-native-mmkv": "^4.0.1",
+    "react-native-nitro-modules": "^0.31.10",
     "react-native-safe-area-context": "^5.6.2",
     "react-native-screens": "^4.18.0",
     "react-native-toast-message": "^2.3.3",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "stable-hash": "^0.0.6",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

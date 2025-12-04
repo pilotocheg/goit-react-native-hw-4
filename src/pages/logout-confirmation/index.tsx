@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../utils/redux/dispatch';
 
 export function LogoutConfirmation() {
   const navigation = useNavigation();
-  const { setIsAuthenticated } = useAuthContext();
+  const { setToken } = useAuthContext();
   const dispatch = useAppDispatch();
 
   const handleCancel = () => {
@@ -15,7 +15,7 @@ export function LogoutConfirmation() {
   };
 
   const handleConfirm = () => {
-    setIsAuthenticated(false);
+    setToken(null);
     dispatch(resetState());
   };
 

@@ -9,10 +9,12 @@ import {
 import addIcon from '../../assets/icons/add-icon.png';
 import { createTodoThunk } from '../../redux/todos/thunks';
 import { useAppDispatch } from '../../utils/redux/dispatch';
+import { useUserId } from '../../context/auth';
 
 import { styles } from './styles';
 
 export function AddTodoInput() {
+  const userId = useUserId();
   const dispatch = useAppDispatch();
   const [text, setText] = useState('');
 
@@ -23,7 +25,7 @@ export function AddTodoInput() {
 
     if (!trimmedText) return;
 
-    dispatch(createTodoThunk(trimmedText));
+    dispatch(createTodoThunk({ text: trimmedText, userId }));
     setText('');
   };
 

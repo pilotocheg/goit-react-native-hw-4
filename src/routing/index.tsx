@@ -1,15 +1,15 @@
 import { NavigationContainer, StaticParamList } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { useAuthContext } from '../context/auth';
 import LoginPage from '../pages/login';
 import HomePage from '../pages/home';
 import { LogoutConfirmation } from '../pages/logout-confirmation';
-import { useAuthContext } from '../context/auth';
 
 const AppStack = createNativeStackNavigator();
 
 export function Routing() {
-  const { isAuthenticated } = useAuthContext();
+  const { token } = useAuthContext();
 
   return (
     <NavigationContainer>
@@ -21,7 +21,7 @@ export function Routing() {
           },
         }}
       >
-        {isAuthenticated ? (
+        {token ? (
           <>
             <AppStack.Screen name="Home" component={HomePage} />
             <AppStack.Screen

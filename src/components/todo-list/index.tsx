@@ -15,11 +15,14 @@ import {
   selectFilter,
   selectLoading,
   selectTodos,
+  TodosFilter,
 } from '../../redux/todos';
 import { fetchTodosThunk } from '../../redux/todos/thunks';
 import { useAppDispatch } from '../../utils/redux/dispatch';
+import { useUserId } from '../../context/auth';
 
 import { TodoItem } from '../todo-item';
+import { EmptyState } from '../empty-state';
 
 import { useResetScrollPosition } from './use-reset-scroll-position';
 import { styles } from './styles';
@@ -27,6 +30,7 @@ import { styles } from './styles';
 const keyExtractor = (item: TodoItemType) => item.id;
 
 export function TodoList() {
+  const userId = useUserId();
   const dispatch = useAppDispatch();
   const todos = useSelector(selectTodos);
   const filter = useSelector(selectFilter);
@@ -45,15 +49,15 @@ export function TodoList() {
 
   useEffect(() => {
     dispatch(resetTodos());
-    dispatch(fetchTodosThunk());
-  }, [filter, dispatch]);
+    dispatch(fetchTodosThunk(userId));
+  }, [filter, dispatch, userId]);
 
   const loadMoreTodos = () => {
     if (allLoaded || loading) {
       return;
     }
 
-    dispatch(fetchTodosThunk());
+    dispatch(fetchTodosThunk(userId));
   };
 
   if (loading && !todos.length) {
@@ -61,6 +65,23 @@ export function TodoList() {
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
+    );
+  }
+
+  if (!todos.length) {
+    if (filter === TodosFilter.ALL) {
+      return (
+        <EmptyState
+          title="Nothing here. For now."
+          description="Start adding new todos to get started"
+        />
+      );
+    }
+    return (
+      <EmptyState
+        title="Nothing here"
+        description="No todos found for this section"
+      />
     );
   }
 

@@ -1,11 +1,13 @@
 import { createContext } from 'react';
 
+export type TokenValue = string | null;
+
 type AuthData = {
-  isAuthenticated: boolean;
-  setIsAuthenticated: (isAuthenticated: boolean) => void;
+  token: TokenValue;
+  setToken: (token: TokenValue) => void;
 };
 
 export const AuthContext = createContext<AuthData>({
-  isAuthenticated: false,
-  setIsAuthenticated: () => {},
+  token: null,
+  setToken: () => {},
 });

@@ -43,21 +43,6 @@ export const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    height: 40,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1.5,
-    borderColor: theme.colors.primary,
-  },
-  buttonText: {
-    fontWeight: '600',
-    color: theme.colors.primary,
-  },
-  confirmButton: {
-    backgroundColor: theme.colors.primary,
-  },
-  confirmButtonText: {
-    color: 'white',
+    width: 'auto',
   },
 });

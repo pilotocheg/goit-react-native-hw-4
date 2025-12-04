@@ -1,13 +1,30 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useMemo, useState } from 'react';
 
-import { AuthContext } from './context';
+import { storage } from '../../utils/storage';
+
+import { AuthContext, TokenValue } from './context';
+
+const STORAGE_KEY = 'token';
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  return (
-    <AuthContext value={{ isAuthenticated, setIsAuthenticated }}>
-      {children}
-    </AuthContext>
+  const [token, setToken] = useState<TokenValue>(
+    () => storage.getString(STORAGE_KEY) ?? null,
   );
+
+  const contextValue = useMemo(
+    () => ({
+      token,
+      setToken: (newToken: TokenValue) => {
+        setToken(newToken);
+        if (newToken) {
+          storage.set(STORAGE_KEY, newToken);
+        } else {
+          storage.remove(STORAGE_KEY);
+        }
+      },
+    }),
+    [token, setToken],
+  );
+
+  return <AuthContext value={contextValue}>{children}</AuthContext>;
 };

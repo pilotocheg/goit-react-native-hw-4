@@ -1,4 +1,6 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
+
+import { Button } from '../button';
 
 import { styles } from './styles';
 
@@ -30,17 +32,17 @@ export function ConfirmationModal(props: Props) {
           <Text style={styles.message}>{message}</Text>
         </View>
         <View style={styles.buttons}>
-          <TouchableOpacity style={styles.button} onPress={onCancel}>
-            <Text style={styles.buttonText}>{cancelText}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, styles.confirmButton]}
+          <Button
+            style={styles.button}
+            title={cancelText}
+            onPress={onCancel}
+            variant="outlined"
+          />
+          <Button
+            style={styles.button}
+            title={confirmText}
             onPress={onConfirm}
-          >
-            <Text style={[styles.buttonText, styles.confirmButtonText]}>
-              {confirmText}
-            </Text>
-          </TouchableOpacity>
+          />
         </View>
       </View>
     </View>
