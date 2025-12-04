@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TodosFilter, TodosState } from './types';
 import {
   createTodoThunk,
+  deleteTodoThunk,
   fetchTodosThunk,
   toggleCompletedThunk,
 } from './thunks';
@@ -59,6 +60,9 @@ export const todosSlice = createSlice({
       if (todoIndex !== -1) {
         state.todos[todoIndex] = action.payload;
       }
+    });
+    builder.addCase(deleteTodoThunk.fulfilled, (state, action) => {
+      state.todos = state.todos.filter(t => t.id !== action.payload.id);
     });
   },
   selectors: {

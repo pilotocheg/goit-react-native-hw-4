@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { createTodo, getTodos, updateTodo } from '../../api/todos';
+import { createTodo, deleteTodo, getTodos, updateTodo } from '../../api/todos';
 import { TodoItem } from '../../api/todos/dto';
 import { GetTodosParams } from '../../api/todos/types';
 import { RootState } from '../store';
@@ -41,6 +41,14 @@ export const createTodoThunk = createAsyncThunk(
       createdAt: Date.now(),
       userId,
     }),
+);
+
+export const deleteTodoThunk = createAsyncThunk(
+  'todos/deleteTodo',
+  async (todo: TodoItem) => {
+    await deleteTodo(todo.id);
+    return todo;
+  },
 );
 
 export const toggleCompletedThunk = createAsyncThunk(

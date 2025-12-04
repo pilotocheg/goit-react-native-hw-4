@@ -1,5 +1,6 @@
 import { NavigationContainer, StaticParamList } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import BootSplash from 'react-native-bootsplash';
 
 import { useAuthContext } from '../context/auth';
 import LoginPage from '../pages/login';
@@ -12,7 +13,7 @@ export function Routing() {
   const { token } = useAuthContext();
 
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={() => BootSplash.hide({ fade: true })}>
       <AppStack.Navigator
         screenOptions={{
           headerShown: false,
