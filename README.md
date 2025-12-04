@@ -1,18 +1,21 @@
 # Todos App
 
-## Home work 7 - Optimizations
-### Add Todo Animation example
-https://github.com/user-attachments/assets/e8359452-0339-4912-9397-71a08ed25504
+## Final project - key improvements:
+### 1. Login screen (and authorization flow)
+<img width="402" height="874" alt="Simulator Screenshot - iPhone 17 Pro - 2025-12-04 at 17 07 30" src="https://github.com/user-attachments/assets/33765a9c-4b5a-40a9-ada0-f35eb42e859a" />
 
 
-### Memo optimization - before and after
-https://github.com/user-attachments/assets/91c36a37-9a9f-4db5-8f69-771bf8917394
+### 2. Empty state
+<img width="402" height="874" alt="Simulator Screenshot - iPhone 17 Pro - 2025-12-04 at 17 12 46" src="https://github.com/user-attachments/assets/dcd765b1-8b8b-4b80-b407-5f2704c8c58f" />
 
-https://github.com/user-attachments/assets/5bdcf2cb-6e5e-491f-954e-ce07f17ba96b
 
-### Packages optimization
-No heavy packages to replace
+### 3. Delete todo feature
+<img width="402" height="874" alt="Simulator Screenshot - iPhone 17 Pro - 2025-12-04 at 17 07 17" src="https://github.com/user-attachments/assets/31506382-57ea-43dd-a4e2-b00a5b0dc381" />
 
+
+### 4. App Icon and Splash screen
+<img width="402" height="874" alt="Simulator Screenshot - iPhone 17 Pro - 2025-12-04 at 17 10 38" src="https://github.com/user-attachments/assets/2df3e056-311a-45a2-b55e-f5a20e6c3b5f" />
+<img width="402" height="874" alt="Simulator Screenshot - iPhone 17 Pro - 2025-12-04 at 17 11 04" src="https://github.com/user-attachments/assets/778e763a-c1ed-424c-b4d8-6b1699664c8c" />
 
 
 ## Getting Started
